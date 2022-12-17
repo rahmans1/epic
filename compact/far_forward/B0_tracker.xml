@@ -150,6 +150,14 @@
     </detector>
 
   </detectors>
+  
+  <plugins>
+    <plugin name="DD4hep_ParametersPlugin">
+      <argument value="B0Tracker"/>
+      <argument value="layer_pattern: str=B0Tracker_layer\d"/>
+    </plugin>
+  </plugins>
+
 
   <readouts>
     <readout name="B0TrackerHits">

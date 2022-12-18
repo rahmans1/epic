@@ -41,7 +41,7 @@
     <vis name="TOFCFoamVis"       ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
     <vis name="TOFCHoneycombVis"  ref="TrackerServiceVis"   visible="true"  showDaughters="true"/>
 
-    <vis name="FFTrackerVis"        ref="AnlRed" />
+    <vis name="FFTrackerVis"        ref="AnlRed"              visible="true"  showDaughters="true"/>
     <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />
     <vis name="FFTrackerShieldingVis" ref="AnlGray"           visible="true"  showDaughters="false" />
     <vis name="FFTrackerServiceVis" ref="AnlGold"             visible="true"  showDaughters="false" />

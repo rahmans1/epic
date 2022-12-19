@@ -244,18 +244,21 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
     double z_dr     = z_layout.dr();       // Radial offest of modules in z
     double z0       = z_layout.z0();       // Sets how much overlap in z the nz modules have
 
+    Assembly layer_assembly(lay_nam);
     Volume      module_env = volumes[m_nam];
     DetElement  lay_elt(sdet, lay_nam, lay_id);
     Placements& sensVols = sensitives[m_nam];
 
-    auto &layerParams =
-        DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(
-            lay_elt);
-
-    for (xml_coll_t lmat(x_layer, _Unicode(layer_material)); lmat; ++lmat) {
-      xml_comp_t x_layer_material = lmat;
-      DD4hepDetectorHelper::xmlToProtoSurfaceMaterial(x_layer_material, layerParams, "layer_material");
-    }
+    auto &layerParams = DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(
+                      layer_elt);
+    layerParams.set<double>("envelope_r_min", 73. * cm);
+    layerParams.set<double>("envelope_r_max", 73. * cm);
+    layerParams.set<double>("envelope_z_min", -197 * cm);
+    layerParams.set<double>("envelope_z_max", 145 * cm);
+    
+    pv = assembly.placeVolume(layer_assembly);
+    pv.addPhysVolID("layer", layer_id);
+    lay_elt.setPlacement(pv);
 
     int module = 1;
     // loop over the modules in phi
@@ -275,7 +278,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
 
         Transform3D tr(RotationZYX(0.0, ((M_PI / 2) - phic - phi_tilt), -M_PI / 2),
                        Position(xc, yc, mpgd_dirc_pos.z() + z_placement + z_offset)); // in x-y plane,
-        pv = assembly.placeVolume(module_env, tr);
+        pv = layer_assembly.placeVolume(module_env, tr);
         pv.addPhysVolID("module", module);
         mod_elt.setPlacement(pv);
         for (size_t ic = 0; ic < sensVols.size(); ++ic) {
@@ -296,6 +299,8 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
       rc += rphi_dr;
     }
   }
+  layer_assembly->GetShape()->ComputeBBox();
+
   sdet.setAttributes(description, assembly, x_det.regionStr(), x_det.limitsStr(), x_det.visStr());
   assembly.setVisAttributes(description.invisible());
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);

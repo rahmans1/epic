@@ -135,7 +135,7 @@
         name="OuterMPGDSubSubAssembly"
         type="DD4hep_SubdetectorAssembly"
         vis="TrackerSubAssemblyVis">
-        <composite name="MPGDDIRC"/>
+        <composite name="MPGDDIRC_0"/>
     </detector>
     <detector id="TrackerSubAssembly_6_ID"
       name="EndcapTOFSubSubAssembly"

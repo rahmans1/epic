@@ -250,7 +250,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
     Placements& sensVols = sensitives[m_nam];
 
     auto &layerParams = DD4hepDetectorHelper::ensureExtension<dd4hep::rec::VariantParameters>(
-                      layer_elt);
+                      lay_elt);
     layerParams.set<double>("envelope_r_min", 73. * cm);
     layerParams.set<double>("envelope_r_max", 73. * cm);
     layerParams.set<double>("envelope_z_min", -197 * cm);

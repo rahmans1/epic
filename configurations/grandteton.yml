@@ -6,6 +6,7 @@ features:
     silicon_disks:
     silicon_barrel:
     vertex_barrel:
+    mpgd_dirc:
     mpgd_barrel:
     tof_barrel:
     tof_endcap:

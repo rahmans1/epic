@@ -257,7 +257,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
     layerParams.set<double>("envelope_z_max", 145 * cm);
     
     pv = assembly.placeVolume(layer_assembly);
-    pv.addPhysVolID("layer", layer_id);
+    pv.addPhysVolID("layer", lay_id);
     lay_elt.setPlacement(pv);
 
     int module = 1;

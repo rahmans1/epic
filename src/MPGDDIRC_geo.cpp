@@ -298,9 +298,8 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
       phic += phi_incr;
       rc += rphi_dr;
     }
+    layer_assembly->GetShape()->ComputeBBox();
   }
-  layer_assembly->GetShape()->ComputeBBox();
-
   sdet.setAttributes(description, assembly, x_det.regionStr(), x_det.limitsStr(), x_det.visStr());
   assembly.setVisAttributes(description.invisible());
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);

@@ -69,6 +69,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
   sens.setType("tracker");
   double total_thickness = 0;
   double frame_thickness = 0;
+  double gas_thickness = 0;
   
   // loop over the modules
   for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
@@ -115,7 +116,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
     double thickness_sum        = -total_thickness / 2.0;
     double max_component_width  = 0;
     double max_component_length = 0;
-    double gas_thickness        = 0.0;
+    gas_thickness        = 0.0;
     for (xml_coll_t mci(x_mod, _U(module_component)); mci; ++mci, ++ncomponents) {
       xml_comp_t x_comp    = mci;
       string     c_nam     = _toString(ncomponents, "component%d");

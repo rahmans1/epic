@@ -247,7 +247,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
     double z_dr     = z_layout.dr();       // Radial offest of modules in z
     double z0       = z_layout.z0();       // Sets how much overlap in z the nz modules have
 
-    Tube       lay_tub(rc-frame_thickness, rc+dimensions.height(), dimensions.length());
+    Tube       lay_tub(rc-gas_thickness, rc+dimensions.height(), dimensions.length());
     Volume     lay_vol(lay_nam, lay_tub, description.air()); // Create the layer envelope volume.
     Position   lay_pos(0, 0,  mpgd_dirc_pos.z());
     lay_vol.setVisAttributes(description.visAttributes(x_layer.visStr()));

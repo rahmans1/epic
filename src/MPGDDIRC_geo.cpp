@@ -67,7 +67,9 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
 
   map<string, std::array<double, 2>> module_thicknesses;
   sens.setType("tracker");
-
+  double total_thickness = 0;
+  double frame_thickness = 0;
+  
   // loop over the modules
   for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
     xml_comp_t x_mod = mi;
@@ -81,7 +83,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
 
     int    ncomponents     = 0;
     int    sensor_number   = 1;
-    double total_thickness = 0;
+    total_thickness = 0;
 
     // Compute module total thickness from components
     xml_coll_t ci(x_mod, _U(module_component));
@@ -186,7 +188,7 @@ static Ref_t create_MPGDDIRC_geo(Detector& description, xml_h e, SensitiveDetect
       thickness_so_far += x_comp.thickness();
     }
     // Now add-on the frame
-    double frame_thickness=0;
+    frame_thickness=0;
     if (x_mod.hasChild(_U(frame))) {
       xml_comp_t m_frame         = x_mod.child(_U(frame));
       frame_thickness = getAttrOrDefault<double>(m_frame, _U(thickness), total_thickness);
